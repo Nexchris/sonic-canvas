@@ -9,11 +9,12 @@
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="animate__animated animate__fadeIn animate__delay-2s">
+    <audio id="titleSong" src="./music/bgm/titleSong.mp3"></audio>
 <main>
 <img class="w-70" src="./image/misc/SonicTitle2.png" alt="">
 <h1 class="text-5xl">Canvas Project</h1>
 <div class="canvas-container">
-<canvas></canvas>
+<canvas id="canvas"></canvas>
 <div class="canvas-overlay">▶</div>
 <video id="splash" src="./video/splashScreen.mp4"></video>
 </div>
@@ -23,9 +24,11 @@
     Voir mon Github
 </a>
 </main>
+<script src="./js/titleScreen.js"></script>
 <script>
     const overlay = document.querySelector(".canvas-overlay");
     const video = document.getElementById("splash");
+    const Titlesong = document.getElementById("titleSong");
 
     overlay.addEventListener("click", () => {
         overlay.style.display = "none";   // Cache l’overlay
@@ -36,6 +39,8 @@
     // Optionnel : cacher la vidéo quand elle se termine
     video.addEventListener("ended", () => {
         video.style.display = "none";
+           canvas.style.display = "block";
+        Titlesong.play();
     });
 </script>
 </body>
