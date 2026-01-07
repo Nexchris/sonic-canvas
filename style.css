@@ -1,0 +1,41 @@
+@font-face {
+    font-family: Cooper;
+    src: url(./font/CooperMdBT-Regular.ttf);
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1{
+    font-family: Cooper, sans-serif;
+    color: white;
+text-shadow:
+  0 0 5px #004aad,
+  0 0 10px #004aad,
+  0 0 15px #004aad,
+  0 0 20px #004aad;
+}
+canvas {
+        margin-top: 1rem;
+    background-color: #004aad;
+    margin-bottom: 1rem;
+    width: 640px;
+    height: 360px;
+}
+
+/* Quand l'écran fait au moins 800px de large */
+@media (max-width: 800px) {
+    canvas {
+        width: auto;
+        height: auto;
+    }
+}
+#button{
+    background-color: #004aad;
+    border-radius: 1rem;
+    color: white;
+    font-family: Cooper, sans-serif;
+}
