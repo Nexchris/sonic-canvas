@@ -12,12 +12,31 @@
 <main>
 <img class="w-70" src="./image/misc/SonicTitle2.png" alt="">
 <h1 class="text-5xl">Canvas Project</h1>
+<div class="canvas-container">
 <canvas></canvas>
+<div class="canvas-overlay">▶</div>
+<video id="splash" src="./video/splashScreen.mp4"></video>
+</div>
 <a href="https://github.com/Nexchris" target="_blank"
    class="px-10 py-4 text-5xl flex items-center gap-4" id="button">
     <img src="./image/misc/github.png" class="w-12 h-12" alt="">
     Voir mon Github
 </a>
 </main>
+<script>
+    const overlay = document.querySelector(".canvas-overlay");
+    const video = document.getElementById("splash");
+
+    overlay.addEventListener("click", () => {
+        overlay.style.display = "none";   // Cache l’overlay
+        video.play();                     // Lance la vidéo
+        video.style.display = "block";    // Affiche la vidéo si elle était cachée
+    });
+
+    // Optionnel : cacher la vidéo quand elle se termine
+    video.addEventListener("ended", () => {
+        video.style.display = "none";
+    });
+</script>
 </body>
 </html>
