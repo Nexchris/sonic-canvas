@@ -1,3 +1,4 @@
+import { selectMenu } from './selectMenu.js';
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 canvas.width = 640;
@@ -13,6 +14,7 @@ ctx.fillStyle = "white";
 
 const backgroundImage = new Image();
 const SonicTitle = new Image();
+const Clickaudio = new Audio("../music//sfx/click.wav");
 
 backgroundImage.src = "../image/background/titleScreen1.png" ;
 SonicTitle.src = "../image/misc/sonicTitle.png";
@@ -36,3 +38,10 @@ function titleScreen() {
   ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
 
 }
+
+canvas.addEventListener("click", () => {
+      Clickaudio.play();
+  setTimeout(() => {
+    selectMenu(); // ← transition vers ton menu
+  }, 200);
+});

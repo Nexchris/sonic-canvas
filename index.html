@@ -8,13 +8,13 @@
     <link rel="stylesheet"    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="animate__animated animate__fadeIn animate__delay-2s">
+<body class="animate__animated animate__fadeInLeftBig ">
     <audio id="titleSong" src="./music/bgm/titleSong.mp3"></audio>
 <main>
-<img class="w-70" src="./image/misc/SonicTitle2.png" alt="">
+<img class="w-70" src="./image/misc/SonicTitle.png" alt="">
 <h1 class="text-5xl">Canvas Project</h1>
 <div class="canvas-container">
-<canvas id="canvas"></canvas>
+<canvas id="canvas" class="animate__animated animate__fadeIn"></canvas>
 <div class="canvas-overlay">▶</div>
 <video id="splash" src="./video/splashScreen.mp4"></video>
 </div>
@@ -24,24 +24,30 @@
     Voir mon Github
 </a>
 </main>
-<script src="./js/titleScreen.js"></script>
+<script type="module" src="./js/titleScreen.js"></script>
 <script>
-    const overlay = document.querySelector(".canvas-overlay");
-    const video = document.getElementById("splash");
-    const Titlesong = document.getElementById("titleSong");
+const overlay = document.querySelector(".canvas-overlay");
+const video = document.getElementById("splash");
+const Titlesong = document.getElementById("titleSong");
+const canvas = document.getElementById("canvas");
 
-    overlay.addEventListener("click", () => {
-        overlay.style.display = "none";   // Cache l’overlay
-        video.play();                     // Lance la vidéo
-        video.style.display = "block";    // Affiche la vidéo si elle était cachée
-    });
+overlay.addEventListener("click", () => {
+    canvas.style.display = "none";      // Cache le canvas
+    overlay.style.display = "none";     // Cache l’overlay
+    video.style.display = "block";      // Affiche la vidéo
+    video.play();                       // Lance la vidéo
+});
 
-    // Optionnel : cacher la vidéo quand elle se termine
-    video.addEventListener("ended", () => {
-        video.style.display = "none";
-           canvas.style.display = "block";
+// Cacher la vidéo quand elle se termine
+video.addEventListener("ended", () => {
+    video.style.display = "none";
+
+    setTimeout(() => {
+        canvas.style.display = "block"; // Affiche le canvas après 50ms
         Titlesong.play();
-    });
+    }, 50);
+});
 </script>
+
 </body>
 </html>
