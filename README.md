@@ -2,7 +2,7 @@
 
 ![Écran principal du jeu](https://github.com/user-attachments/assets/6d1bee89-f92e-4da4-9401-de7e7fbcb3b4)
 
-**Sonic Canvas Project** est un projet de jeu inspiré de *Sonic the Hedgehog*, développé entièrement en **JavaScript** avec **HTML5 Canvas**.
+**Sonic Canvas Project** est un projet de jeu inspiré de *Sonic the Hedgehog*, développé entièrement en **JavaScript** avec **HTML5 Canvas**. ( **Pas encore de version disponible mais pour bientôt** ! )
 
 ---
 
@@ -54,3 +54,4 @@ Le jeu contient encore des bugs, mais reste **immersif** et fun à jouer.
 - **Développeur :** Nex_Chris  
 - **Musique et sons :** Tous proviennent de SEGA, ce jeu n’est pas commercial.  
 - **Sprites :** Dessinateur talentueux disponible ici : [Patreon](https://www.patreon.com/collection/1690085?view=expanded)
+
