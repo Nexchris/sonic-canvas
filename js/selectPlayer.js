@@ -81,13 +81,7 @@ class Character {
     }
 
     draw(ctx) {
-        ctx.drawImage(
-            this.frames[this.frameIndex],
-            this.x,
-            this.y,
-            this.width,
-            this.height
-        );
+        ctx.drawImage(this.frames[this.frameIndex], this.x, this.y, this.width, this.height);
     }
 }
 
@@ -96,7 +90,14 @@ const tails = new Character(tailsFrames, 200, 150);
 const knuckles = new Character(knuckleFrames, 360, 150);
 const amy = new Character(amyFrames, 520, 150);
 
-export function selectMenu() {
+const buttons = [
+    { id: "sonic",    x: 25,  y: 250, w: 110, h: 40 },
+    { id: "tails",    x: 185, y: 250, w: 110, h: 40 },
+    { id: "knuckles", x: 345, y: 250, w: 110, h: 40 },
+    { id: "amy",      x: 505, y: 250, w: 110, h: 40 }
+];
+
+export function selectPlayer() {
     const grad1 = ctx.createLinearGradient(0, 0, 280, 0);
     grad1.addColorStop(0, "#5de0e6");
     grad1.addColorStop(1, "#004aad");
@@ -115,25 +116,22 @@ export function selectMenu() {
 
     ctx.fillStyle = grad1;
     ctx.fillRect(0, 0, 160, 360);
-
     ctx.fillStyle = grad2;
     ctx.fillRect(160, 0, 160, 360);
-
     ctx.fillStyle = grad3;
     ctx.fillRect(320, 0, 160, 360);
-
     ctx.fillStyle = grad4;
     ctx.fillRect(480, 0, 160, 360);
 
-    ctx.drawImage(SonicTitle, 5, 10, 320/2.2, 80/2.2);
-    ctx.drawImage(TailsTitle, 160, 0, 1280/8, 534/8);
-    ctx.drawImage(KnucklesTitle, 320, 15, 1000/6.2, 205/6.2);
-    ctx.drawImage(AmyTitle, 485, 10, 1120/8, 320/8);
+    ctx.drawImage(SonicTitle, 5, 10, 320 / 2.2, 80 / 2.2);
+    ctx.drawImage(TailsTitle, 160, 0, 1280 / 8, 534 / 8);
+    ctx.drawImage(KnucklesTitle, 320, 15, 1000 / 6.2, 205 / 6.2);
+    ctx.drawImage(AmyTitle, 485, 10, 1120 / 8, 320 / 8);
 
-    ctx.drawImage(SonicButton, 25, 250, 110, 40);
-    ctx.drawImage(TailsButton, 185, 250, 110, 40);
-    ctx.drawImage(KnucklesButton, 345, 250, 110, 40);
-    ctx.drawImage(AmyButton, 505, 250, 110, 40);
+    ctx.drawImage(SonicButton, buttons[0].x, buttons[0].y, buttons[0].w, buttons[0].h);
+    ctx.drawImage(TailsButton, buttons[1].x, buttons[1].y, buttons[1].w, buttons[1].h);
+    ctx.drawImage(KnucklesButton, buttons[2].x, buttons[2].y, buttons[2].w, buttons[2].h);
+    ctx.drawImage(AmyButton, buttons[3].x, buttons[3].y, buttons[3].w, buttons[3].h);
 }
 
 canvas.addEventListener("mousemove", (e) => {
@@ -141,32 +139,40 @@ canvas.addEventListener("mousemove", (e) => {
     const mouseX = e.clientX - rect.left;
     const mouseY = e.clientY - rect.top;
 
-    const buttons = [
-        { x: 25,  y: 250, w: 110, h: 40 },
-        { x: 185, y: 250, w: 110, h: 40 },
-        { x: 345, y: 250, w: 110, h: 40 },
-        { x: 505, y: 250, w: 110, h: 40 }
-    ];
-
-    let hovering = false;
-
+    let hover = false;
     for (let b of buttons) {
-        if (
-            mouseX >= b.x &&
-            mouseX <= b.x + b.w &&
-            mouseY >= b.y &&
-            mouseY <= b.y + b.h
-        ) {
-            hovering = true;
+        if (mouseX >= b.x && mouseX <= b.x + b.w && mouseY >= b.y && mouseY <= b.y + b.h) {
+            hover = true;
             break;
         }
     }
 
-    canvas.style.cursor = hovering ? "pointer" : "default";
+    canvas.style.cursor = hover ? "pointer" : "default";
+});
+
+canvas.addEventListener("click", (e) => {
+    const rect = canvas.getBoundingClientRect();
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+
+    for (let b of buttons) {
+        if (mouseX >= b.x && mouseX <= b.x + b.w && mouseY >= b.y && mouseY <= b.y + b.h) {
+            if (b.id === "sonic") {
+                document.querySelectorAll('audio').forEach(audio => {
+                    audio.pause();
+                    audio.currentTime = 0;
+                });
+                
+                import("./GameSonic.js").then(module => module.startAnimation());
+            }
+            break;
+        }
+    }
 });
 
 function loop() {
-    selectMenu();
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    selectPlayer();
 
     sonic.update();
     knuckles.update();

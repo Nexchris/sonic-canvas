@@ -20,7 +20,6 @@ text-shadow:
 }
 .canvas-container {
     position: relative;
- border: 4px solid black; /* Bordure noire */
     border-radius: 8px;      
     width: 640px;
     height: 360px;
@@ -93,4 +92,25 @@ video {
     border-radius: 1rem;
     color: white;
     font-family: Cooper, sans-serif;
+}
+
+.game-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 640px;
+  height: 360px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 50;
+  background: rgba(0,0,0,0.4);
+}
+
+.hidden {
+  display: none;
+}
+
+.canvas-container {
+  position: relative;
 }

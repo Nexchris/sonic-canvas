@@ -1,47 +1,32 @@
-import { selectMenu } from './selectMenu.js';
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 canvas.width = 640;
 canvas.height = 360;
 
-const title = {
-  width: 879,
-  height: 209
-};
-
 ctx.font = "20px SEGA";
 ctx.fillStyle = "white";
 
 const backgroundImage = new Image();
-const SonicTitle = new Image();
 const Clickaudio = new Audio("../music//sfx/click.wav");
 
-backgroundImage.src = "../image/background/titleScreen1.png" ;
-SonicTitle.src = "../image/misc/sonicTitle.png";
-
-let backgroundLoaded = false;
-let titleLoaded = false;
+backgroundImage.src = "../image/background/titleScreen.png";
 
 backgroundImage.onload = () => {
-  backgroundLoaded = true;
-  if (titleLoaded) titleScreen();
+  titleScreen();
 };
-
-SonicTitle.onload = () => {
-  titleLoaded = true;
-  if (backgroundLoaded) titleScreen();
-};
-
 
 function titleScreen() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
-
 }
 
-canvas.addEventListener("click", () => {
-      Clickaudio.play();
-  setTimeout(() => {
-    selectMenu(); // ← transition vers ton menu
-  }, 200);
-});
+export function startSelectPlayer() {
+  Clickaudio.play();
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  canvas.removeEventListener("click", startSelectPlayer);
+  import("./selectPlayer.js").then(module => {
+    module.selectPlayer();
+  });
+}
+
+canvas.addEventListener("click", startSelectPlayer);

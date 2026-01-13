@@ -6,6 +6,7 @@
     <title>Sonic Canvas</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet"    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="victory.css">
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="animate__animated animate__fadeInLeftBig ">
@@ -14,9 +15,40 @@
 <img class="w-70" src="./image/misc/SonicTitle.png" alt="">
 <h1 class="text-5xl">Canvas Project</h1>
 <div class="canvas-container">
-<canvas id="canvas" class="animate__animated animate__fadeIn"></canvas>
+<div id="victoryOverlay" class="game-overlay hidden">
+  <div class="result-screen">
+    <div class="left">
+      <div class="winner-box">WINNER</div>
+      <div class="buttons">
+        <button id="restartVictoryBtn">Restart</button>
+<button id="changeCharLosing">Change<br>Character</button>
+      </div>
+    </div>
+    <div class="right">
+      <img src="../image/victory-pose/victory-sonic.png">
+    </div>
+  </div>
+</div>
+
+<div id="losingOverlay" class="game-overlay hidden">
+  <div class="lose-screen">
+    <div class="left">
+      <div class="winner-box">LOSE</div>
+      <div class="buttons">
+      <button id="restartLosingBtn">Restart</button>
+<button id="resetAllBtn">Change<br>Character</button>
+      </div>
+    </div>
+    <div class="right">
+      <img src="../image/game-over/loseScreen.png">
+    </div>
+  </div>
+</div>
+
+<canvas id="canvas" class="canvasGame2 animate__animated animate__fadeIn"></canvas>
 <div class="canvas-overlay">▶</div>
 <video id="splash" src="./video/splashScreen.mp4"></video>
+
 </div>
 <a href="https://github.com/Nexchris" target="_blank"
    class="px-10 py-4 text-5xl flex items-center gap-4" id="button">
@@ -32,18 +64,18 @@ const Titlesong = document.getElementById("titleSong");
 const canvas = document.getElementById("canvas");
 
 overlay.addEventListener("click", () => {
-    canvas.style.display = "none";      // Cache le canvas
-    overlay.style.display = "none";     // Cache l’overlay
-    video.style.display = "block";      // Affiche la vidéo
-    video.play();                       // Lance la vidéo
+    canvas.style.display = "none";      
+    overlay.style.display = "none";    
+    video.style.display = "block";     
+    video.play();                      
 });
 
-// Cacher la vidéo quand elle se termine
+
 video.addEventListener("ended", () => {
     video.style.display = "none";
 
     setTimeout(() => {
-        canvas.style.display = "block"; // Affiche le canvas après 50ms
+        canvas.style.display = "block";
         Titlesong.play();
     }, 50);
 });
