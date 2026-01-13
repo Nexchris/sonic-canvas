@@ -4,6 +4,8 @@
 
 **Sonic Canvas Project** est un projet de jeu inspiré de *Sonic the Hedgehog*, développé entièrement en **JavaScript** avec **HTML5 Canvas**.
 
+**Pas encore de version disponible à travers un site mais pour bientot !**
+
 ---
 
 ## Écran de sélection des personnages
