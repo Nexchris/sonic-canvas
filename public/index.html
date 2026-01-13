@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sonic Canvas</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/style/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="/style/victory.css">
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/image/misc/favicon.webp" type="image/x-icon">
+</head>
+
+<body class="animate__animated animate__fadeInLeftBig">
+
+    <!-- Audio -->
+    <audio id="titleSong" src="/audio/bgm/titleSong.mp3"></audio>
+
+<main>
+
+    <!-- Title Image -->
+    <img class="w-70" src="/image/misc/SonicTitle.png" alt="">
+
+    <h1 class="text-5xl">Canvas Project</h1>
+
+    <div class="canvas-container">
+
+        <!-- Victory Screen -->
+        <div id="victoryOverlay" class="game-overlay hidden">
+            <div class="result-screen">
+                <div class="left">
+                    <div class="winner-box">WINNER</div>
+                    <div class="buttons">
+                        <button id="restartVictoryBtn">Restart</button>
+                        <button id="changeCharLosing">Change<br>Character</button>
+                    </div>
+                </div>
+                <div class="right">
+                    <img src="/image/victory-pose/victory-sonic.png" alt="">
+                </div>
+            </div>
+        </div>
+
+        <!-- Losing Screen -->
+        <div id="losingOverlay" class="game-overlay hidden">
+            <div class="lose-screen">
+                <div class="left">
+                    <div class="winner-box">LOSE</div>
+                    <div class="buttons">
+                        <button id="restartLosingBtn">Restart</button>
+                        <button id="resetAllBtn">Change<br>Character</button>
+                    </div>
+                </div>
+                <div class="right">
+                    <img src="/image/game-over/loseScreen.png" alt="">
+                </div>
+            </div>
+        </div>
+
+        <!-- Canvas -->
+        <canvas id="canvas" class="canvasGame2 animate__animated animate__fadeIn"></canvas>
+        <div class="canvas-overlay">▶</div>
+
+        <!-- Splash Video -->
+        <video id="splash" src="/video/splashScreen.mp4"></video>
+
+    </div>
+
+    <!-- Github Button -->
+    <a href="https://github.com/Nexchris" target="_blank"
+       class="px-10 py-4 text-5xl flex items-center gap-4" id="button">
+        <img src="/image/misc/github.png" class="w-12 h-12" alt="">
+        Voir mon Github
+    </a>
+
+</main>
+
+<!-- JS -->
+<script type="module" src="/js/titleScreen.js"></script>
+
+<script>
+const overlay = document.querySelector(".canvas-overlay");
+const video = document.getElementById("splash");
+const Titlesong = document.getElementById("titleSong");
+const canvas = document.getElementById("canvas");
+
+overlay.addEventListener("click", () => {
+    canvas.style.display = "none";
+    overlay.style.display = "none";
+    video.style.display = "block";
+    video.play();
+});
+
+video.addEventListener("ended", () => {
+    video.style.display = "none";
+    setTimeout(() => {
+        canvas.style.display = "block";
+        Titlesong.play();
+    }, 50);
+});
+</script>
+
+</body>
+</html>
