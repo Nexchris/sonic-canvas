@@ -9,7 +9,7 @@ ctx.fillStyle = "white";
 const backgroundImage = new Image();
 const Clickaudio = new Audio("../music//sfx/click.wav");
 
-backgroundImage.src = "../image/background/titleScreen.png";
+backgroundImage.src = "/image/background/titleScreen.png"
 
 backgroundImage.onload = () => {
   titleScreen();
